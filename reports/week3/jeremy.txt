@@ -1,0 +1,11 @@
+M: 11/9
+    Hours: 1
+
+    Initialized project GitHub repo, wrote README file for repo. Added team members
+    as contributors.
+
+T: 11/10
+W: 11/11
+R: 11/12
+F: 11/13
+A: 11/14
