@@ -1,2 +1,2 @@
-# fall2015-cs151-project
+# Fall 2015 CS151 Project
 SealTeamSix's CS151 Project!
