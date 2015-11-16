@@ -8,4 +8,9 @@ T: 11/10
 W: 11/11
 R: 11/12
 F: 11/13
+    Hours: 2
+
+    Met up with group to discuss project and program architecture. I gave insight
+    on how the Model, View, and Controllers worked and suggested the idea
+    of implementing the Mancala game in command line first.
 A: 11/14
