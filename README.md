@@ -20,6 +20,10 @@ F: 10/30
 A: 10/31
 ```
 
+# Docs
+I'll generate JavaDocs into the `docs/` folder whenever there's a merge into master. Use that
+to help code stuff.
+
 # Submitting Code
 Don't submit your code into `master`. You should only merge non-code files, like `.gitignore`, `README.md`, or `build.gradle`.
 When submitting code, checkout a separate branch naming the feature you want to add, commit your code, then submit a pull
