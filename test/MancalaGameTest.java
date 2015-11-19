@@ -22,7 +22,7 @@ public final class MancalaGameTest
     /**
      * Sets up the Mancala game and test data.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Before
     public void setUp() throws Exception
@@ -57,7 +57,7 @@ public final class MancalaGameTest
      * Clears the listeners from the game so that they can be candidates
      * for garbage collection.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @After
     public void tearDown() throws Exception
@@ -68,7 +68,7 @@ public final class MancalaGameTest
     /**
      * Tests selection from both players.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Test
     public void testStoneSelect() throws Exception
@@ -93,7 +93,7 @@ public final class MancalaGameTest
     /**
      * Tests a successful undo selection.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Test
     public void testUndoSelection() throws Exception
@@ -109,7 +109,7 @@ public final class MancalaGameTest
     /**
      * Tests a failed undo selection.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Test(expected = RuntimeException.class)
     public void testUndoSelectionFailed() throws Exception
@@ -124,7 +124,7 @@ public final class MancalaGameTest
      * Tests the rule where a player gets an extra turn if they stop on their
      * Mancala.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Test
     public void testExtraTurn() throws Exception
@@ -140,7 +140,7 @@ public final class MancalaGameTest
      * the last stone ends on an empty pit, the opposite pit's
      * stones are added to the player's Mancala.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Test
     public void testPitSelectEndOnEmpty() throws Exception
@@ -159,7 +159,7 @@ public final class MancalaGameTest
      * Tests the same rule as above, but for the case where
      * the empty pit is all the way on the left.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Test
     public void testPitSelectEndOnEmptyLeft() throws Exception
@@ -172,7 +172,7 @@ public final class MancalaGameTest
      * Tests the same rule as above, but for the case where
      * the empty pit is all the way on the right.
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Test
     public void testPitSelectEndOnEmptyRight() throws Exception
@@ -190,7 +190,7 @@ public final class MancalaGameTest
     /**
      * Test a game where the player wins
      *
-     * @throws Exception
+     * @throws Exception Because unit test
      */
     @Test
     public void testGameWin() throws Exception
