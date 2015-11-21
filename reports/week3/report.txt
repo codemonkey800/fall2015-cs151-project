@@ -1,0 +1,30 @@
+<<3rd Weekly Report>>
+Monday 11/9-Saturday 11/14
+Team name: Seal Team Six
+Team leader of the week: Sheethal Mathew
+Team Members: Sheethal Mathew, Jeremy Asuncion, Aaron Escoto
+Summary: Met with team members. Decided use cases provided for last week was too complicated to start working on. We chose a simpler path by making, only single model protocol of mancala game. The game will be written in java and ran on eclipse or Machine jay for one of the team members. We are thinking to make to Arrays, one for first player leading up to that player’s Mancala, let us call it Mancala A. The second array for the 2nd player whose array leads up to the next Mancala(B). A player class that keeps track of whose turn it is. A Pit class that keeps track of mancala and possibly have all the rules in it. A Model class would have all the Pit model and Mancala Pit Model Class. Group still debating whether or not to use a separate class to keep track of the Mancala Pit, or include the whole thing in an array.
+Sheethal Mathew
+W: 11/11 Contacted via phone to decide on a meeting date.
+Th: 11/12 Individually thought about the ideas to put forth for the meeting
+F: 11/13
+2 Hours of work
+Model would have Pit Model and Mancala Pit Model. Proposed to compare the 2 mancalas to find the most number at the end of the game to decide the winner of the game. Idea shot down in group discussion, because it would be better to implement it in Controller. View class has not been worked on yet. 
+S: 11/14: Collected each team Member’s report from git hub and made team report of the week. 
+Jeremy Asuncion
+W: 11/11
+R: 11/12
+F: 11/13
++ Hours: 2
+Met up with group to discuss project and program architecture. I gave insight on how the Model, View, and Controllers worked and suggested the idea of implementing the Mancala game in command line first.
+S:11/14
+Aaron Escoto
+W: 11/11
+R: 11/12
+F: 11/13
+Hours: 2
+Met up with group to discuss project and program architecture. I Gave suggestions 
+for class design and responsibilities and how the game should flow regarding those dependencies.
+
+Also discussed the data structure in which we should use. 
+S: 11/14
