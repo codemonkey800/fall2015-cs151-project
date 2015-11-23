@@ -1,0 +1,42 @@
+<<4th Weekly Report>>
+Monday 11/16-Saturday 11/21
+Team name: Seal Team Six
+Team leader of the week: Aaron Escoto
+Team Members: Sheethal Mathew, Jeremy Asuncion, Aaron Escoto
+
+Summary:
+We implemented game logic for our Manacala GUI application. Jeremy wrote sound game code logic 
+and implemented unit testing with JUnit to ensure code behaved correctly, he also implemented the model classes to start the M in MVC.
+
+****Jeremy Asuncion****
+M: 11/6
+T: 11/17
+W: 11/18
+    Hours: 4.5
+
+    I implemented the model classes for the application. I created a base abstract class
+    named Model that defines methods that belong to all of the model classes. Model is
+    extended by PitModel and MancalaModel which operate on data pertaining to
+    the pit and mancala respectively.
+
+    I also implemented the mancala game logic in the MancalagGame class. The class was complicated
+    to write, but I did it somehow. I used JUnit to write a few unit tests to ensure program correctness.
+    So far, the all tests are passing, so we should be good on the game logic side of the application.
+R: 11/19
+F: 11/20
+A: 11/21
+
+****Aaron Escoto****
+M: 11/6
+T: 11/17
+W: 11/18
+    Hours: 1
+    Reviewed jeremy's code and tested locally, also attempted to start GUI integration 
+    of code for Mancala Game 
+R: 11/19
+F: 11/20
+A: 11/21
+    Hours: 1 
+    I wrote weekly summary and gathered reports for week 4 
+    
+****Sheethal Mathew****

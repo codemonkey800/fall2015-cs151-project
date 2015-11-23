@@ -1,0 +1,11 @@
+M: 11/6
+T: 11/17
+W: 11/18
+    Hours: 1
+    Reviewed jeremy's code and tested locally, also attempted to start GUI integration 
+    of code for Mancala Game 
+R: 11/19
+F: 11/20
+A: 11/21
+    Hours: 1 
+    I wrote weekly summary and gathered reports for week 4 
