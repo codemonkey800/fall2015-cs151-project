@@ -31,12 +31,18 @@ M: 11/6
 T: 11/17
 W: 11/18
     Hours: 1
-    Reviewed jeremy's code and tested locally, also attempted to start GUI integration 
-    of code for Mancala Game 
+    I reviewed code and tested locally, also attempted to start GUI integration 
+    of code for Mancala Game.
 R: 11/19
 F: 11/20
 A: 11/21
     Hours: 1 
-    I wrote weekly summary and gathered reports for week 4 
+    I wrote weekly summary and gathered reports for week 4.
     
 ****Sheethal Mathew****
+M: 11/16 :
+T:11/17: 
+W: 11/18: Hours: 0.5. Reviewed Code on command line written by Jeremy
+Th:11/19: Hours: 1. Attempted the creation of own code. Not much happened
+Fr:11/20: 
+Sa: 11/21
