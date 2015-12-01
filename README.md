@@ -1,4 +1,4 @@
-# Fall 2015 CS151 Project ![](https://img.shields.io/gitter/room/nwjs/nw.js.svg)
+# Fall 2015 CS151 Project <a href="https://gitter.im/codemonkey800/fall2015-cs151-project"><img src="https://img.shields.io/gitter/room/nwjs/nw.js.svg"></a>
 SealTeamSix's CS151 Project!
 
 # Reports
