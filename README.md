@@ -1,4 +1,6 @@
 # Fall 2015 CS151 Project
+
+[![Join the chat at https://gitter.im/codemonkey800/fall2015-cs151-project](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/codemonkey800/fall2015-cs151-project?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 SealTeamSix's CS151 Project!
 
 # Reports
