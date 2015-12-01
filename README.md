@@ -1,4 +1,4 @@
-# Fall 2015 CS151 Project
+# Fall 2015 CS151 Project ![](https://img.shields.io/gitter/room/nwjs/nw.js.svg)
 SealTeamSix's CS151 Project!
 
 # Reports
