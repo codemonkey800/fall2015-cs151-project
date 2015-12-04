@@ -25,6 +25,7 @@ public final class PitModel extends Model
     public void addStone()
     {
         stones++;
+        invokeListeners();
     }
 
     /**

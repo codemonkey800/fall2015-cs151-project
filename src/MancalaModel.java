@@ -14,6 +14,7 @@ public final class MancalaModel extends Model
     public void addStone()
     {
         stones++;
+        invokeListeners();
     }
 
     /**

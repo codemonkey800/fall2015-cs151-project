@@ -1,5 +1,3 @@
-import javax.swing.event.ChangeListener;
-
 /**
  * An implementation of the Mancala game using two arrays to hold both
  * player's pits.
@@ -97,26 +95,26 @@ public final class MancalaGame
     }
 
     /**
-     * Add a change listener to the specified player's Mancala.
+     * Returns the mancala model for the specified player.
      *
-     * @param player   The player to attach a listener to
-     * @param listener The listener
+     * @param player The player
+     * @return The mancala model
      */
-    public void addChangeListenerToMancala(int player, ChangeListener listener)
+    public MancalaModel getMancalaModel(int player)
     {
-        mancalas[player].addChangeListener(listener);
+        return mancalas[player];
     }
 
     /**
-     * Adds a change listener to the specified player's pit.
+     * Returns the pit model for the specified player at a specific position.
      *
-     * @param player   The player to attach a listener to
-     * @param position The position of the pit
-     * @param listener The listener
+     * @param player   The player
+     * @param position The position
+     * @return The pit model
      */
-    public void addChangeListenerToPit(int player, int position, ChangeListener listener)
+    public PitModel getPitModel(int player, int position)
     {
-        board[player][position].addChangeListener(listener);
+        return board[player][position];
     }
 
     /**

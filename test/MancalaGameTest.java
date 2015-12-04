@@ -37,14 +37,14 @@ public final class MancalaGameTest
         for(int i = 0; i < MancalaGame.MAX_PLAYERS; i++)
         {
             final int player = i;
-            game.addChangeListenerToMancala(i, event -> {
+            game.getMancalaModel(i).addChangeListener(event -> {
                 mancalas[player] = ((MancalaModel) event.getSource()).getStones();
             });
 
             for(int j = 0; j < MancalaGame.MAX_PITS; j++)
             {
                 final int pit = j;
-                game.addChangeListenerToPit(player, pit, event -> {
+                game.getPitModel(player, pit).addChangeListener(event -> {
                     board[player][pit] = ((PitModel) event.getSource()).getStones();
                 });
 
