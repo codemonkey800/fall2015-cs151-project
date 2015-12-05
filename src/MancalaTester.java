@@ -53,7 +53,7 @@ public final class MancalaTester
             {
                 if(game.isGameOver()) {
                     JOptionPane.showMessageDialog(frame,
-                                                  "Player " + (position == 0 ? "A" : "B") + "won!",
+                                                  "Player " + (position == 0 ? "A" : "B") + " won!",
                                                   "Winner!",
                                                   JOptionPane.INFORMATION_MESSAGE);
                 } else if(player == game.getCurrentPlayer()) {
