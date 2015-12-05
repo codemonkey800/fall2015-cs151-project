@@ -1,11 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
 /**
  * @author Jeremy Asuncion
  */
 public class Pit extends JComponent
 {
+    private static final Font PIT_FONT = new Font("Comic Sans MS", Font.BOLD, 56);
+
     protected BoardTheme theme;
     protected int        stoneCount;
 
@@ -61,5 +64,21 @@ public class Pit extends JComponent
                 g2.fillRect(0, 0, r.width, r.height);
                 break;
         }
+
+        paintStoneCount(g2);
+    }
+
+    protected void paintStoneCount(Graphics2D g2)
+    {
+        g2.setColor(theme.getStoneCountColor());
+        g2.setFont(PIT_FONT);
+
+        String str = String.valueOf(stoneCount);
+        FontMetrics fontMetrics = g2.getFontMetrics();
+        Rectangle rect = getBounds();
+        Rectangle2D stringRect = fontMetrics.getStringBounds(str, g2);
+        int x = (rect.width - (int) stringRect.getWidth()) / 2;
+        int y = (rect.height - (int) stringRect.getHeight()) / 2 + fontMetrics.getAscent();
+        g2.drawString(str, x, y);
     }
 }

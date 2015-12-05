@@ -84,7 +84,8 @@ public final class MancalaTester
         pane.add(playerBDirection, BorderLayout.PAGE_START);
 
         setUIFont(new FontUIResource("Comic Sans MS", Font.BOLD, 16));
-        frame.setSize(1280, 720);
+        frame.setResizable(false);
+        frame.setSize(1280, 500);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);

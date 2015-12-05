@@ -14,6 +14,8 @@ public interface BoardTheme
 
     Color getPitColor();
 
+    Color getStoneCountColor();
+
     ShapeType getPitShape();
 
     BoardTheme THEME_1 = new BoardTheme()
@@ -34,6 +36,12 @@ public interface BoardTheme
         public Color getPitColor()
         {
             return new Color(0xAD716C);
+        }
+
+        @Override
+        public Color getStoneCountColor()
+        {
+            return Color.black;
         }
 
         @Override
@@ -61,6 +69,12 @@ public interface BoardTheme
         public Color getPitColor()
         {
             return Color.white;
+        }
+
+        @Override
+        public Color getStoneCountColor()
+        {
+            return Color.red;
         }
 
         @Override

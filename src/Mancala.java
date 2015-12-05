@@ -29,6 +29,7 @@ public final class Mancala extends Pit
         g2.fillRoundRect(0, 0,
                          r.width, r.height,
                          MANCALA_CORNER_RADIUS, MANCALA_CORNER_RADIUS);
-        g2.drawString(String.valueOf(stoneCount), r.width / 2, r.height / 2);
+
+        paintStoneCount(g2);
     }
 }
