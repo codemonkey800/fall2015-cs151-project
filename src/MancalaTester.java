@@ -6,7 +6,8 @@ import java.util.Enumeration;
 /**
  * Main class. Acts as the main controller for the application.
  */
-public final class MancalaTester {
+public final class MancalaTester
+{
     private static MancalaGame game;
     private static Board       board;
 
@@ -17,11 +18,13 @@ public final class MancalaTester {
      *
      * @param args Command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         SwingUtilities.invokeLater(MancalaTester::startNewGame);
     }
 
-    private static void startNewGame() {
+    private static void startNewGame()
+    {
         String[] options = {
                 "3 stones",
                 "4 stones"
@@ -40,7 +43,8 @@ public final class MancalaTester {
         initMenuBar();
     }
 
-    private static void initUI() {
+    private static void initUI()
+    {
         frame = new JFrame("Mancala Game");
         board = new Board(game);
 
@@ -60,16 +64,17 @@ public final class MancalaTester {
         playerADirection.setEditable(false);
         playerBDirection.setEditable(false);
 
-        JToolBar toolBar = new JToolBar();
-        JButton undoButton = new JButton("Undo Selection");
-        JButton commitButton = new JButton("Commit Selection");
-        JLabel currentPlayerLabel = new JLabel("Current Player: Player A");
+        JToolBar toolBar            = new JToolBar();
+        JButton  undoButton         = new JButton("Undo Selection");
+        JButton  commitButton       = new JButton("Commit Selection");
+        JLabel   currentPlayerLabel = new JLabel("Current Player: Player A");
 
         undoButton.setEnabled(false);
         commitButton.setEnabled(false);
 
         Runnable setPlayerLabelCallback = () -> {
-            if(game.isGameOver()) {
+            if(game.isGameOver())
+            {
                 String winningPlayer = game.getCurrentPlayer() == MancalaGame.PLAYER_A ? "A" : "B";
                 JOptionPane.showMessageDialog(frame,
                                               "Player " + winningPlayer + " won!",
@@ -78,9 +83,12 @@ public final class MancalaTester {
                 return;
             }
 
-            if(game.getCurrentPlayer() == MancalaGame.PLAYER_A) {
+            if(game.getCurrentPlayer() == MancalaGame.PLAYER_A)
+            {
                 currentPlayerLabel.setText("Current Player: Player A");
-            } else {
+            }
+            else
+            {
                 currentPlayerLabel.setText("Current Player: Player B");
             }
         };
@@ -111,15 +119,21 @@ public final class MancalaTester {
         pane.add(playerADirection, BorderLayout.PAGE_END);
         pane.add(topPanel, BorderLayout.PAGE_START);
 
-        board.setBoardListener(new Board.BoardListener() {
+        board.setBoardListener(new Board.BoardListener()
+        {
             @Override
-            public void pitClicked(int player, int position) {
-                if(!game.isGameOver() && player == game.getCurrentPlayer()) {
+            public void pitClicked(int player, int position)
+            {
+                if(!game.isGameOver() && player == game.getCurrentPlayer())
+                {
                     game.selectPit(position);
-                    if(!game.hasUndoAvailable()) {
+                    if(!game.hasUndoAvailable())
+                    {
                         game.commitLastSelection();
                         setPlayerLabelCallback.run();
-                    } else {
+                    }
+                    else
+                    {
                         undoButton.setEnabled(true);
                         commitButton.setEnabled(true);
                     }
@@ -135,14 +149,15 @@ public final class MancalaTester {
         frame.setVisible(true);
     }
 
-    private static void initMenuBar() {
+    private static void initMenuBar()
+    {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu viewMenu = new JMenu("View");
         JMenu gameMenu = new JMenu("Game");
 
-        JMenuItem theme1Item = new JMenuItem("Theme 1");
-        JMenuItem theme2Item = new JMenuItem("Theme 2");
+        JMenuItem theme1Item  = new JMenuItem("Theme 1");
+        JMenuItem theme2Item  = new JMenuItem("Theme 2");
         JMenuItem newGameItem = new JMenuItem("Start New Game");
 
         Font font = Font.getFont("Comic Sans MS");
@@ -173,12 +188,15 @@ public final class MancalaTester {
      *
      * @param fontResource The font resource
      */
-    private static void setUIFont(FontUIResource fontResource) {
+    private static void setUIFont(FontUIResource fontResource)
+    {
         Enumeration keys = UIManager.getDefaults().keys();
-        while(keys.hasMoreElements()) {
-            Object key = keys.nextElement();
+        while(keys.hasMoreElements())
+        {
+            Object key   = keys.nextElement();
             Object value = UIManager.get(key);
-            if(value != null && value instanceof FontUIResource) {
+            if(value != null && value instanceof FontUIResource)
+            {
                 UIManager.put(key, fontResource);
             }
         }

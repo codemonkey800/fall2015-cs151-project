@@ -5,8 +5,6 @@ import java.util.List;
 
 /**
  * An abstract base class representing a data model in MVC.
- *
- * @author Jeremy Asuncion
  */
 public abstract class Model
 {

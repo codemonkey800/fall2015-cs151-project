@@ -6,7 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * @author Jeremy Asuncion
+ * The board view which displays the pits and mancalas, and handles mouse interaction
+ * with the user.
  */
 public final class Board extends JPanel
 {
@@ -20,11 +21,24 @@ public final class Board extends JPanel
     private Pit[][]       pits;
     private BoardListener listener;
 
+    /**
+     * Constructs a new board with the underlying game model {@code game}.
+     *
+     * @param game The game
+     * @see #Board(MancalaGame, BoardTheme)
+     */
     public Board(MancalaGame game)
     {
         this(game, BoardTheme.THEME_1);
     }
 
+    /**
+     * Constructs a new board with the underlying game model {@code game}
+     * with theme {@code theme}.
+     *
+     * @param game  The game
+     * @param theme The theme
+     */
     public Board(MancalaGame game, BoardTheme theme)
     {
         this.game = game;
@@ -37,17 +51,6 @@ public final class Board extends JPanel
             final int pos = i;
             mancalas[i] = new Mancala(0, theme);
             add(mancalas[i]);
-            mancalas[i].addMouseListener(new MouseAdapter()
-            {
-                @Override
-                public void mouseClicked(MouseEvent e)
-                {
-                    if(listener != null)
-                    {
-                        listener.mancalaClicked(pos ^ 1);
-                    }
-                }
-            });
             game.getMancalaModel(i ^ 1).addChangeListener(e -> {
                 MancalaModel model = (MancalaModel) e.getSource();
                 mancalas[pos].setStoneCount(model.getStones());
@@ -58,9 +61,9 @@ public final class Board extends JPanel
         int stones = game.getPitModel(MancalaGame.PLAYER_A, 0).getStones();
         for(int i = 0; i < MancalaGame.MAX_PITS; i++)
         {
-            final int pos = i;
-            Pit pitA = new Pit(stones, theme);
-            Pit pitB = new Pit(stones, theme);
+            final int pos  = i;
+            Pit       pitA = new Pit(stones, theme);
+            Pit       pitB = new Pit(stones, theme);
 
             pits[1][i] = pitA;
             pits[0][MancalaGame.MAX_PITS - i - 1] = pitB;
@@ -108,9 +111,9 @@ public final class Board extends JPanel
             @Override
             public void componentResized(ComponentEvent e)
             {
-                int width = getWidth();
+                int width  = getWidth();
                 int height = getHeight();
-                int dimen = (width - PADDING * 2 - GAP * 7) / 8;
+                int dimen  = (width - PADDING * 2 - GAP * 7) / 8;
 
                 int mancalaHeight = height - PADDING * 2;
 
@@ -122,7 +125,7 @@ public final class Board extends JPanel
 
                 for(int i = 0; i < MancalaGame.MAX_PITS; i++)
                 {
-                    int x = PADDING * (i + 2) + dimen * (i + 1);
+                    int x  = PADDING * (i + 2) + dimen * (i + 1);
                     int y1 = PADDING;
                     int y2 = height - PADDING - dimen;
                     pits[1][i].setBounds(x, y2, dimen, dimen);
@@ -132,28 +135,51 @@ public final class Board extends JPanel
         });
     }
 
+    /**
+     * Returns the theme for this board.
+     *
+     * @return The theme
+     */
     public BoardTheme getTheme()
     {
         return theme;
     }
 
+    /**
+     * Sets the theme for this board.
+     *
+     * @param theme The theme
+     */
     public void setTheme(BoardTheme theme)
     {
         this.theme = theme;
-        for(int i = 0; i < mancalas.length; i++) {
+        for(int i = 0; i < mancalas.length; i++)
+        {
             mancalas[i].setTheme(theme);
-            for(int j = 0; j < pits[0].length; j++) {
+            for(int j = 0; j < pits[0].length; j++)
+            {
                 pits[i][j].setTheme(theme);
             }
         }
         repaint();
     }
 
+    /**
+     * Sets the board listner for this board. There can only be one listener at a time.
+     *
+     * @param listener The listener
+     */
     public void setBoardListener(BoardListener listener)
     {
         this.listener = listener;
     }
 
+    /**
+     * Paints the background of the board specfieied in the {@code BoardTheme}
+     * class.
+     *
+     * @param g The graphics object
+     */
     @Override
     protected void paintComponent(Graphics g)
     {
@@ -162,12 +188,19 @@ public final class Board extends JPanel
         g.fillRect(0, 0, r.width, r.height);
     }
 
+    /**
+     * An interface for listening to board events.
+     */
     public interface BoardListener
     {
-        default void mancalaClicked(int player)
-        {
-        }
-
+        /**
+         * Fired whenever a pit is clicked. The {@code player} argument
+         * is the current player, and the {@code position} argument
+         * is the position of the clicked pit.
+         *
+         * @param player   The player
+         * @param position The pit clicked
+         */
         default void pitClicked(int player, int position)
         {
         }

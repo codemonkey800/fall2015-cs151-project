@@ -1,7 +1,5 @@
 /**
  * A class representing a pit in the rows of a Mancala board.
- *
- * @author Jeremy Asuncion
  */
 public final class PitModel extends Model
 {

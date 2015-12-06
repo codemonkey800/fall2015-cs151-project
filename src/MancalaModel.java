@@ -1,7 +1,5 @@
 /**
  * A class representing a Mancala at the ends of a Mancala board.
- *
- * @author Jeremy Asuncion
  */
 public final class MancalaModel extends Model
 {
