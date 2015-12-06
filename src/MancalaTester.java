@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
+
 import java.awt.*;
+import java.awt.event.WindowEvent;
 import java.util.Enumeration;
 
 /**
@@ -21,6 +23,7 @@ public final class MancalaTester
     public static void main(String[] args)
     {
         SwingUtilities.invokeLater(() -> {
+        	
 //            String[] options = {
 //                    "3 stones",
 //                    "4 stones"
@@ -33,7 +36,7 @@ public final class MancalaTester
 //                                                         null,
 //                                                         options,
 //                                                         options[0]);
-
+            
             game = new MancalaGame(MancalaGame.MIN_INITIAL_STONES);
             initUI();
             initMenuBar();
@@ -94,22 +97,39 @@ public final class MancalaTester
     private static void initMenuBar()
     {
         JMenuBar menuBar = new JMenuBar();
+      
+        
         JMenu viewMenu = new JMenu("View");
+        JMenu viewGame = new JMenu("New Game");
+        
         JMenuItem theme1Item = new JMenuItem("Theme 1");
         JMenuItem theme2Item = new JMenuItem("Theme 2");
-
+        JMenuItem newGameItem = new JMenuItem("Start New Game");
+        
         Font font = Font.getFont("Comic Sans MS");
         theme1Item.setFont(font);
         theme2Item.setFont(font);
-
+        newGameItem.setFont(font);
+        
+        viewGame.add(newGameItem);
         viewMenu.add(theme1Item);
         viewMenu.add(theme2Item);
+        
+        menuBar.add(viewGame);
         menuBar.add(viewMenu);
-
+        
         theme1Item.addActionListener(e -> board.setTheme(BoardTheme.THEME_1));
         theme2Item.addActionListener(e -> board.setTheme(BoardTheme.THEME_2));
-
+        newGameItem.addActionListener(e ->  SwingUtilities.invokeLater(() -> {
+        
+  game = new MancalaGame(MancalaGame.MIN_INITIAL_STONES);
+ 
+  initUI();
+  initMenuBar();
+ // frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+}));
         frame.setJMenuBar(menuBar);
+     
     }
 
     /**
@@ -132,3 +152,4 @@ public final class MancalaTester
         }
     }
 }
+
