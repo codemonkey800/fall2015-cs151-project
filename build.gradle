@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+sourceSets {
+    main.java.srcDir 'src'
+    test.java.srcDir 'test'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
