@@ -38,6 +38,7 @@ public final class PitModel extends Model
     {
         int stones = this.stones;
         this.stones = 0;
+        invokeListeners();
         return stones;
     }
 

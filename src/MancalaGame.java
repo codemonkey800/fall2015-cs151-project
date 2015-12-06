@@ -4,8 +4,7 @@
  *
  * @author Jeremy Asuncion
  */
-public final class MancalaGame
-{
+public final class MancalaGame {
     /**
      * The maximum amount of players allowed in a game.
      */
@@ -62,8 +61,7 @@ public final class MancalaGame
      *
      * @see #MancalaGame(int)
      */
-    public MancalaGame()
-    {
+    public MancalaGame() {
         this(MIN_INITIAL_STONES);
     }
 
@@ -73,10 +71,8 @@ public final class MancalaGame
      *
      * @param initialStones The amount of stones to fill in each pit
      */
-    public MancalaGame(int initialStones)
-    {
-        if(initialStones < MIN_INITIAL_STONES || initialStones > MAX_INITIAL_STONES)
-        {
+    public MancalaGame(int initialStones) {
+        if(initialStones < MIN_INITIAL_STONES || initialStones > MAX_INITIAL_STONES) {
             throw new RuntimeException("Initial stones is not >=" + MIN_INITIAL_STONES +
                                        " nor <=" + MAX_INITIAL_STONES);
         }
@@ -87,8 +83,7 @@ public final class MancalaGame
 
         board = new PitModel[2][MAX_PITS];
 
-        for(int i = 0; i < MAX_PITS; i++)
-        {
+        for(int i = 0; i < MAX_PITS; i++) {
             board[PLAYER_A][i] = new PitModel(initialStones);
             board[PLAYER_B][i] = new PitModel(initialStones);
         }
@@ -100,8 +95,7 @@ public final class MancalaGame
      * @param player The player
      * @return The mancala model
      */
-    public MancalaModel getMancalaModel(int player)
-    {
+    public MancalaModel getMancalaModel(int player) {
         return mancalas[player];
     }
 
@@ -112,21 +106,17 @@ public final class MancalaGame
      * @param position The position
      * @return The pit model
      */
-    public PitModel getPitModel(int player, int position)
-    {
+    public PitModel getPitModel(int player, int position) {
         return board[player][position];
     }
 
     /**
      * Clears all listeners for both Mancalas and pits
      */
-    public void clearListeners()
-    {
-        for(int i = 0; i < MAX_PLAYERS; i++)
-        {
+    public void clearListeners() {
+        for(int i = 0; i < MAX_PLAYERS; i++) {
             mancalas[i].clearChangeListeners();
-            for(int j = 0; j < MAX_PITS; j++)
-            {
+            for(int j = 0; j < MAX_PITS; j++) {
                 board[i][j].clearChangeListeners();
             }
         }
@@ -137,8 +127,7 @@ public final class MancalaGame
      *
      * @return The current player.
      */
-    public int getCurrentPlayer()
-    {
+    public int getCurrentPlayer() {
         return currentPlayer;
     }
 
@@ -148,8 +137,7 @@ public final class MancalaGame
      *
      * @return The winning player, or -1 if no one has won
      */
-    public int getWinningPlayer()
-    {
+    public int getWinningPlayer() {
         return winningPlayer;
     }
 
@@ -158,8 +146,7 @@ public final class MancalaGame
      *
      * @return True if game over, false if not
      */
-    public boolean isGameOver()
-    {
+    public boolean isGameOver() {
         return winningPlayer != -1;
     }
 
@@ -171,13 +158,11 @@ public final class MancalaGame
      * @throws ArrayIndexOutOfBoundsException If the position is not within {@code 0 <= position < 6}
      * @throws RuntimeException               If the game is over or if there is a pending commit
      */
-    public void selectPit(int position)
-    {
+    public void selectPit(int position) {
         if(winningPlayer != -1) throw new RuntimeException("The game is already over");
         if(hasPendingCommit) throw new RuntimeException("The game's data has to be committed first");
 
-        if(position < 0 || position >= MAX_PITS)
-        {
+        if(position < 0 || position >= MAX_PITS) {
             throw new ArrayIndexOutOfBoundsException();
         }
 
@@ -191,12 +176,10 @@ public final class MancalaGame
 
         hasPendingCommit = true;
 
-        while(stones > 0)
-        {
+        while(stones > 0) {
             // Add a stone to the next pit in the sequence
             // until we reach the end of the row, or until we are out of stones
-            for(; position < MAX_PITS && stones > 0; position++)
-            {
+            for(; position < MAX_PITS && stones > 0; position++) {
                 board[row][position].addStone();
                 stones--;
             }
@@ -204,16 +187,14 @@ public final class MancalaGame
             // If there are still stones present
             // and we are on the current player's row,
             // add a stone to their Mancala
-            if(stones > 0 && row == currentPlayer)
-            {
+            if(stones > 0 && row == currentPlayer) {
                 mancalas[row].addStone();
                 stones--;
 
                 // If we stop at the Mancala, then the player gets another turn,
                 // so we end the loop here. We set the hasExtraTurn variable
                 // to true so that the player value doesn't get reassigned
-                if(stones == 0 && position == MAX_PITS)
-                {
+                if(stones == 0 && position == MAX_PITS) {
                     hasExtraTurn = true;
                     break;
                 }
@@ -225,8 +206,7 @@ public final class MancalaGame
             // the pit before the current one. If the pit was empty,
             // then there should only be 1 stone in there.
             if(stones == 0 && row == currentPlayer &&
-               position - 1 < MAX_PITS && board[row][position - 1].getStones() == 1)
-            {
+               position - 1 < MAX_PITS && board[row][position - 1].getStones() == 1) {
 
                 // Since we aligned the rows on index, we need to reverse
                 // the index to get the opposite pit.
@@ -256,31 +236,34 @@ public final class MancalaGame
      *
      * @throws RuntimeException If the game is over or if there is no pending commit
      */
-    public void commitLastSelection()
-    {
+    public void commitLastSelection() {
         if(winningPlayer != -1) throw new RuntimeException("The game is already over");
         if(!hasPendingCommit) throw new RuntimeException("There is no pending data commit");
 
-        for(int i = 0; i < MAX_PLAYERS; i++)
-        {
+        for(int i = 0; i < MAX_PLAYERS; i++) {
             mancalas[i].commitChange();
 
-            for(int j = 0; j < MAX_PITS; j++)
-            {
+            for(int j = 0; j < MAX_PITS; j++) {
                 board[i][j].commitChange();
             }
         }
         hasPendingCommit = false;
         hasUndoAvailable = true;
-        if(hasExtraTurn)
-        {
+        if(hasExtraTurn) {
             hasExtraTurn = false;
-        }
-        else
-        {
+        } else {
             currentPlayer ^= 1;
         }
         checkForWinners();
+    }
+
+    /**
+     * Checks if the current player can undo their last selection.
+     *
+     * @return True if can undo, false otherwise
+     */
+    public boolean hasUndoAvailable() {
+        return hasUndoAvailable;
     }
 
     /**
@@ -293,35 +276,30 @@ public final class MancalaGame
      *                          if there is no pending commit,
      *                          or if there is no undo available
      */
-    public void undoLastSelection()
-    {
+    public void undoLastSelection() {
         if(winningPlayer != -1) throw new RuntimeException("The game is already over");
         if(!hasPendingCommit) throw new RuntimeException("There is no pending data commit");
         if(!hasUndoAvailable) throw new RuntimeException("The current player cannot undo multiple times");
 
-        for(int i = 0; i < MAX_PLAYERS; i++)
-        {
+        for(int i = 0; i < MAX_PLAYERS; i++) {
             mancalas[i].undoChange();
 
-            for(int j = 0; j < MAX_PITS; j++)
-            {
+            for(int j = 0; j < MAX_PITS; j++) {
                 board[i][j].undoChange();
             }
         }
         hasUndoAvailable = false;
+        hasPendingCommit = false;
     }
 
     /**
      * Checks the board for winners and assigns the appropriate variables in the
      * case that happens.
      */
-    private void checkForWinners()
-    {
-        for(int i = 0; i < MAX_PLAYERS; i++)
-        {
+    private void checkForWinners() {
+        for(int i = 0; i < MAX_PLAYERS; i++) {
             boolean isRowEmpty = true;
-            for(int j = 0; j < MAX_PITS && isRowEmpty; j++)
-            {
+            for(int j = 0; j < MAX_PITS && isRowEmpty; j++) {
                 if(!board[i][j].isEmpty()) isRowEmpty = false;
             }
 
@@ -329,12 +307,10 @@ public final class MancalaGame
             // sum up the total stones
             // in the opposite row and add it to that
             // player's Mancala
-            if(isRowEmpty)
-            {
+            if(isRowEmpty) {
                 int stones = 0;
                 int player = i == PLAYER_A ? PLAYER_B : PLAYER_A;
-                for(int j = 0; j < MAX_PITS; j++)
-                {
+                for(int j = 0; j < MAX_PITS; j++) {
                     stones += board[player][j].removeAllStones();
                 }
                 mancalas[player].addStones(stones);

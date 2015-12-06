@@ -44,22 +44,6 @@ public final class MancalaTester {
         frame = new JFrame("Mancala Game");
         board = new Board(game);
 
-        board.setBoardListener(new Board.BoardListener() {
-            @Override
-            public void pitClicked(int player, int position) {
-                if(game.isGameOver()) {
-                    JOptionPane.showMessageDialog(frame,
-                                                  "Player " + (position == 0 ? "A" : "B") + " won!",
-                                                  "Winner!",
-                                                  JOptionPane.INFORMATION_MESSAGE);
-                } else if(player == game.getCurrentPlayer()) {
-                    System.out.println("Pit" + (player == 0 ? "A" : "B") + position + " selected!");
-                    game.selectPit(position);
-                    game.commitLastSelection();
-                }
-            }
-        });
-
         Container pane = frame.getContentPane();
         pane.add(board, BorderLayout.CENTER);
 
@@ -76,8 +60,72 @@ public final class MancalaTester {
         playerADirection.setEditable(false);
         playerBDirection.setEditable(false);
 
+        JToolBar toolBar = new JToolBar();
+        JButton undoButton = new JButton("Undo Selection");
+        JButton commitButton = new JButton("Commit Selection");
+        JLabel currentPlayerLabel = new JLabel("Current Player: Player A");
+
+        undoButton.setEnabled(false);
+        commitButton.setEnabled(false);
+
+        Runnable setPlayerLabelCallback = () -> {
+            if(game.isGameOver()) {
+                String winningPlayer = game.getCurrentPlayer() == MancalaGame.PLAYER_A ? "A" : "B";
+                JOptionPane.showMessageDialog(frame,
+                                              "Player " + winningPlayer + " won!",
+                                              "Winner!",
+                                              JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            if(game.getCurrentPlayer() == MancalaGame.PLAYER_A) {
+                currentPlayerLabel.setText("Current Player: Player A");
+            } else {
+                currentPlayerLabel.setText("Current Player: Player B");
+            }
+        };
+
+        undoButton.addActionListener(e -> {
+            game.undoLastSelection();
+            undoButton.setEnabled(false);
+            commitButton.setEnabled(false);
+        });
+
+        commitButton.addActionListener(e -> {
+            game.commitLastSelection();
+            undoButton.setEnabled(false);
+            commitButton.setEnabled(false);
+            setPlayerLabelCallback.run();
+        });
+
+        toolBar.setFloatable(false);
+        toolBar.add(undoButton);
+        toolBar.add(commitButton);
+        toolBar.add(currentPlayerLabel);
+
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
+        topPanel.add(toolBar, BorderLayout.PAGE_START);
+        topPanel.add(playerBDirection, BorderLayout.PAGE_END);
+
         pane.add(playerADirection, BorderLayout.PAGE_END);
-        pane.add(playerBDirection, BorderLayout.PAGE_START);
+        pane.add(topPanel, BorderLayout.PAGE_START);
+
+        board.setBoardListener(new Board.BoardListener() {
+            @Override
+            public void pitClicked(int player, int position) {
+                if(!game.isGameOver() && player == game.getCurrentPlayer()) {
+                    game.selectPit(position);
+                    if(!game.hasUndoAvailable()) {
+                        game.commitLastSelection();
+                        setPlayerLabelCallback.run();
+                    } else {
+                        undoButton.setEnabled(true);
+                        commitButton.setEnabled(true);
+                    }
+                }
+            }
+        });
 
         setUIFont(new FontUIResource("Comic Sans MS", Font.BOLD, 16));
         frame.setResizable(false);
@@ -90,9 +138,8 @@ public final class MancalaTester {
     private static void initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
-
         JMenu viewMenu = new JMenu("View");
-        JMenu viewGame = new JMenu("New Game");
+        JMenu gameMenu = new JMenu("Game");
 
         JMenuItem theme1Item = new JMenuItem("Theme 1");
         JMenuItem theme2Item = new JMenuItem("Theme 2");
@@ -103,21 +150,21 @@ public final class MancalaTester {
         theme2Item.setFont(font);
         newGameItem.setFont(font);
 
-        viewGame.add(newGameItem);
         viewMenu.add(theme1Item);
         viewMenu.add(theme2Item);
+        gameMenu.add(newGameItem);
 
-        menuBar.add(viewGame);
+        menuBar.add(gameMenu);
         menuBar.add(viewMenu);
 
         theme1Item.addActionListener(e -> board.setTheme(BoardTheme.THEME_1));
         theme2Item.addActionListener(e -> board.setTheme(BoardTheme.THEME_2));
         newGameItem.addActionListener(e -> {
             frame.setVisible(false);
+            game.clearListeners();
             startNewGame();
         });
         frame.setJMenuBar(menuBar);
-
     }
 
     /**

@@ -13,8 +13,7 @@ public final class MancalaModel extends Model
      */
     public void addStone()
     {
-        stones++;
-        invokeListeners();
+        addStones(1);
     }
 
     /**
@@ -27,6 +26,7 @@ public final class MancalaModel extends Model
     {
         if(stones < 0) throw new IllegalArgumentException("stones cannot be negative");
         this.stones += stones;
+        invokeListeners();
     }
 
     /**
