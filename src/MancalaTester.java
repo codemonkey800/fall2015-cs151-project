@@ -1,15 +1,12 @@
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
-
 import java.awt.*;
-import java.awt.event.WindowEvent;
 import java.util.Enumeration;
 
 /**
  * Main class. Acts as the main controller for the application.
  */
-public final class MancalaTester
-{
+public final class MancalaTester {
     private static MancalaGame game;
     private static Board       board;
 
@@ -20,40 +17,36 @@ public final class MancalaTester
      *
      * @param args Command line arguments
      */
-    public static void main(String[] args)
-    {
-        SwingUtilities.invokeLater(() -> {
-        	
-//            String[] options = {
-//                    "3 stones",
-//                    "4 stones"
-//            };
-//            int selection = JOptionPane.showOptionDialog(frame,
-//                                                         "How many stones per pit?",
-//                                                         "Game Options",
-//                                                         JOptionPane.YES_NO_OPTION,
-//                                                         JOptionPane.QUESTION_MESSAGE,
-//                                                         null,
-//                                                         options,
-//                                                         options[0]);
-            
-            game = new MancalaGame(MancalaGame.MIN_INITIAL_STONES);
-            initUI();
-            initMenuBar();
-        });
-
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(MancalaTester::startNewGame);
     }
 
-    private static void initUI()
-    {
+    private static void startNewGame() {
+        String[] options = {
+                "3 stones",
+                "4 stones"
+        };
+        int selection = JOptionPane.showOptionDialog(frame,
+                                                     "How many stones per pit?",
+                                                     "Game Options",
+                                                     JOptionPane.YES_NO_OPTION,
+                                                     JOptionPane.QUESTION_MESSAGE,
+                                                     null,
+                                                     options,
+                                                     options[0]);
+
+        game = new MancalaGame(selection == 0 ? MancalaGame.MIN_INITIAL_STONES : MancalaGame.MAX_INITIAL_STONES);
+        initUI();
+        initMenuBar();
+    }
+
+    private static void initUI() {
         frame = new JFrame("Mancala Game");
         board = new Board(game);
 
-        board.setBoardListener(new Board.BoardListener()
-        {
+        board.setBoardListener(new Board.BoardListener() {
             @Override
-            public void pitClicked(int player, int position)
-            {
+            public void pitClicked(int player, int position) {
                 if(game.isGameOver()) {
                     JOptionPane.showMessageDialog(frame,
                                                   "Player " + (position == 0 ? "A" : "B") + " won!",
@@ -94,42 +87,37 @@ public final class MancalaTester
         frame.setVisible(true);
     }
 
-    private static void initMenuBar()
-    {
+    private static void initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
-      
-        
+
+
         JMenu viewMenu = new JMenu("View");
         JMenu viewGame = new JMenu("New Game");
-        
+
         JMenuItem theme1Item = new JMenuItem("Theme 1");
         JMenuItem theme2Item = new JMenuItem("Theme 2");
         JMenuItem newGameItem = new JMenuItem("Start New Game");
-        
+
         Font font = Font.getFont("Comic Sans MS");
         theme1Item.setFont(font);
         theme2Item.setFont(font);
         newGameItem.setFont(font);
-        
+
         viewGame.add(newGameItem);
         viewMenu.add(theme1Item);
         viewMenu.add(theme2Item);
-        
+
         menuBar.add(viewGame);
         menuBar.add(viewMenu);
-        
+
         theme1Item.addActionListener(e -> board.setTheme(BoardTheme.THEME_1));
         theme2Item.addActionListener(e -> board.setTheme(BoardTheme.THEME_2));
-        newGameItem.addActionListener(e ->  SwingUtilities.invokeLater(() -> {
-        
-  game = new MancalaGame(MancalaGame.MIN_INITIAL_STONES);
- 
-  initUI();
-  initMenuBar();
- // frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-}));
+        newGameItem.addActionListener(e -> {
+            frame.setVisible(false);
+            startNewGame();
+        });
         frame.setJMenuBar(menuBar);
-     
+
     }
 
     /**
@@ -138,15 +126,12 @@ public final class MancalaTester
      *
      * @param fontResource The font resource
      */
-    private static void setUIFont(FontUIResource fontResource)
-    {
+    private static void setUIFont(FontUIResource fontResource) {
         Enumeration keys = UIManager.getDefaults().keys();
-        while(keys.hasMoreElements())
-        {
+        while(keys.hasMoreElements()) {
             Object key = keys.nextElement();
             Object value = UIManager.get(key);
-            if(value != null && value instanceof FontUIResource)
-            {
+            if(value != null && value instanceof FontUIResource) {
                 UIManager.put(key, fontResource);
             }
         }

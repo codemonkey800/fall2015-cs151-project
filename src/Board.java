@@ -20,8 +20,6 @@ public final class Board extends JPanel
     private Pit[][]       pits;
     private BoardListener listener;
 
-    private int dimen;
-
     public Board(MancalaGame game)
     {
         this(game, BoardTheme.THEME_1);
@@ -112,7 +110,7 @@ public final class Board extends JPanel
             {
                 int width = getWidth();
                 int height = getHeight();
-                dimen = (width - PADDING * 2 - GAP * 7) / 8;
+                int dimen = (width - PADDING * 2 - GAP * 7) / 8;
 
                 int mancalaHeight = height - PADDING * 2;
 
